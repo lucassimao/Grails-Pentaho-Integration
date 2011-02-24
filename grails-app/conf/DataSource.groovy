@@ -14,7 +14,7 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop','update'
-						url = "jdbc:hsqldb:file:prodDb;shutdown=true"
+			url = "jdbc:hsqldb:file:prodDb;shutdown=true"
             //url = "jdbc:postgresql://localhost/first_report"
            // driverClassName = "org.postgresql.Driver"
            // dialect = org.hibernate.dialect.PostgreSQLDialect
