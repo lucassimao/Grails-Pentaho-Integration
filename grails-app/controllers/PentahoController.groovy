@@ -14,6 +14,7 @@ import org.pentaho.reporting.engine.classic.core.parameters.*
 
 class PentahoController {
  	DataSource dataSource;
+	
     def index2 = {
 		
 			SQLReportDataFactory dataFactory = new SQLReportDataFactory	(dataSource.getConnection());		
