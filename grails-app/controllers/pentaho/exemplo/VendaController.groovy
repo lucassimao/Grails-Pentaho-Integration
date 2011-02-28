@@ -30,9 +30,9 @@ class VendaController {
     }
 	
 	def report = {
-		def report =  vendaReportService.getRelatorio()
-		response.contentType = 'application/pdf'
-		PdfReportUtil.createPDF(report,response.outputStream)	
+			def report =  vendaReportService.getRelatorio()
+			response.contentType = 'application/pdf'
+			PdfReportUtil.createPDF(report,response.outputStream)	
 	}
 
     def create = {

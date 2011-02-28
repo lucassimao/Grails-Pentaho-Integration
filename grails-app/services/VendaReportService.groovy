@@ -9,30 +9,17 @@ import org.springframework.core.io.ResourceLoader
 import javax.swing.table.*
 import org.pentaho.reporting.engine.classic.core.MasterReport
 
-class MeuFactory extends TableDataFactory{
-	public MeuFactory(){
-		super()
-	}
-	
-	public MeuFactory(String name, TableModel tableModel){
-		super(name,tableModel)
-	}
-	
-	public TableModel queryData(String query, DataRow parameters){
-		def t = super.queryData(query,parameters)
-		println query
-		println parameters.columnNames
-		return t
-	}
-}
+
 class VendaReportService implements ResourceLoaderAware{
 	
 	ResourceLoader resourceLoader
 	
 	def getRelatorio(){
 
-		def dataFactory = new MeuFactory("Query 1", new VendasTableModel())
-		dataFactory.addTable("Query 2", new ItensTableModel())
+		def dataFactory = new MeuFactory()
+
+		dataFactory.addTable("QueryVendas", new VendasTableModel())
+		dataFactory.addTable("QueryItens", new ItensTableModel())
 		def manager = new ResourceManager();
 		manager.registerDefaults();
 		URL path = resourceLoader.getResource('relatorios/testeMasterDetail.prpt').getURL()
@@ -40,6 +27,9 @@ class VendaReportService implements ResourceLoaderAware{
 		def masterReport = res.resource
 		
 		masterReport.setDataFactory(dataFactory);
+		def subr =  masterReport.rootGroup.body.itemBand.elementArray[-1]
+		subr.dataFactory = dataFactory
+		// masterReport.rootGroup.body.itemBand.properties.each{ println it.key}
 		
 		//masterReport.parameterValues.put("usuario","teste")
 
