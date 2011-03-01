@@ -27,12 +27,8 @@ class VendaReportService implements ResourceLoaderAware{
 		def masterReport = res.resource
 		
 		masterReport.setDataFactory(dataFactory);
-		def subr =  masterReport.rootGroup.body.itemBand.elementArray[-1]
+		def subr =  masterReport.rootGroup.body.itemBand.elementArray.find{e-> e.name == 'produtos da venda' }
 		subr.dataFactory = dataFactory
-		// masterReport.rootGroup.body.itemBand.properties.each{ println it.key}
-		
-		//masterReport.parameterValues.put("usuario","teste")
-
 		return masterReport		
 	}
 }
